@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="AMAModel">
+ <xsd:annotation>
+    <xsd:documentation>
+ First cut at developing input specification for AMAModels.
+    </xsd:documentation>
+ </xsd:annotation>
+<xsd:complexType>
+<xsd:choice minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref='endogenousVariable'  minOccurs='0'  maxOccurs='unbounded'/>
+    <xsd:element ref='exogenousVariable'  minOccurs='0'  maxOccurs='unbounded'/>
+    <xsd:element ref='parameter'  minOccurs='0'  maxOccurs='unbounded'/>
+    <xsd:element ref='substitutions'  
+                     minOccurs='0'  maxOccurs='unbounded'/>
+    <xsd:element ref='innovation'  minOccurs='0'  maxOccurs='unbounded'/>
+    <xsd:element ref='equation' minOccurs='0' maxOccurs='unbounded'/>
+    <xsd:element ref='description' minOccurs='0' maxOccurs='unbounded'/>
+</xsd:choice>
+    <xsd:attribute name='modelName'  default='untitled'/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name='equation'>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base='xsd:string'>
+<xsd:attribute name='name' type='xsd:string' use='optional'/>
+<xsd:attribute name='description' type='xsd:string' use='optional'/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+
+<xsd:element name='endogenousVariable'>
+<xsd:complexType>
+<xsd:attribute name='name' type='xsd:string' use='required'/>
+<xsd:attribute name='description' type='xsd:string' use='optional'/>
+</xsd:complexType>
+</xsd:element>
+
+
+<xsd:element name='exogenousVariable'>
+<xsd:complexType>
+<xsd:attribute name='name' type='xsd:string' use='required'/>
+<xsd:attribute name='description' type='xsd:string' use='optional'/>
+</xsd:complexType>
+</xsd:element>
+
+
+<xsd:element name='parameter'>
+<xsd:complexType>
+<xsd:attribute name='name' type='xsd:string' use='required'/>
+<xsd:attribute name='defaultValue' type='xsd:string' use='optional'/>
+<xsd:attribute name='description' type='xsd:string' use='optional'/>
+</xsd:complexType>
+</xsd:element>
+
+
+
+<xsd:element name='substitutions'>
+<xsd:complexType>
+<xsd:attribute name='name' type='xsd:string' use='required'/>
+<xsd:attribute name='replacementRules' type='xsd:string' use='required'/>
+<xsd:attribute name='description' type='xsd:string' use='optional'/>
+</xsd:complexType>
+</xsd:element>
+
+
+<xsd:element name='innovation'>
+<xsd:complexType>
+<xsd:attribute name='name' type='xsd:string' use='required'/>
+<xsd:attribute name='distribution' default='unknown'/>
+<xsd:attribute name='description' type='xsd:string' use='optional'/>
+</xsd:complexType>
+</xsd:element>
+
+<xsd:simpleType name='distribution'>
+<xsd:restriction base='xsd:string'>
+<xsd:enumeration value='unknown'/>
+<xsd:enumeration value='normal'/>
+<xsd:enumeration value='logNormal'/>
+</xsd:restriction>
+</xsd:simpleType>
+
+
+
+<xsd:element name='description' type='xsd:string'/>
+
+
+
+
+</xsd:schema>
